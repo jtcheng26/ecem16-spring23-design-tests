@@ -1,8 +1,5 @@
 import random
 
-print("A[16] B[16] AWON DOUT[16]")
-
-cnt = 0
 
 def bitstostr(x):
     s = ""
@@ -10,11 +7,29 @@ def bitstostr(x):
         s += "1" if ((x >> i) & 1) else "0"
     return s
 
+
 def numones(x):
     y = 0
     for i in range(16):
         y += 1 if ((x >> i) & 1) else 0
     return y
+
+
+def randnones(n):
+    s = []
+    for i in range(n):
+        s.append("1")
+    for i in range(16 - n):
+        s.append("0")
+    for i in range(n):
+        temp = s[i]
+        j = random.randrange(i, 16)
+        s[i] = s[j]
+        s[j] = temp
+    return "".join(s)
+
+
+print("A[16] B[16] AWON DOUT[16]")
 
 for k in range(16):
     i = 2 ** 16 - 1 - 2 ** k
@@ -36,18 +51,6 @@ for k in range(16):
     print(f"{bi} {bj} {'1' if ni >= nj else '0'} {bi if ni >= nj else bj}")
     print(f"{bj} {bi} {'1' if nj >= ni else '0'} {bj if nj >= ni else bi}")
 
-def randnones(n):
-    s = []
-    for i in range(n):
-        s.append("1")
-    for i in range(16 - n):
-        s.append("0")
-    for i in range(n):
-        temp = s[i]
-        j = random.randrange(i, 16)
-        s[i] = s[j]
-        s[j] = temp
-    return "".join(s)
 
 for n in range(16):
     for m in range(16):
